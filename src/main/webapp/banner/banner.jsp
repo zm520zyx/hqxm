@@ -18,7 +18,7 @@
                     var index = $("#dg").edatagrid("getRowIndex", row);
                     $("#dg").edatagrid("editRow", index);
                 } else {
-                    alert("请先选中行")
+                    alert("请先选中要修改的行")
                 }
             }
         }, '-', {
@@ -47,7 +47,7 @@
                             }
                         });
                 } else {
-                    alert("请先选中行")
+                    alert("请先选中要删除的行")
                 }
             }
         }, '-', {
@@ -81,7 +81,6 @@
         });
 
         $("#Dialog2").dialog({
-
             title: "添加分类",
             width:400,
             height:300,
@@ -91,6 +90,7 @@
             cache:false,
             href:"${pageContext.request.contextPath}/banner/add.jsp"
         });
+
 
         $("#savebut").linkbutton({
             iconCls:"icon-save",
@@ -130,6 +130,8 @@
 
 <div id="Dialog2"></div>
 
+
 <div id="save2">
     <a  id="savebut">点击添加</a>
 </div>
+

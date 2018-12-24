@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.AlbumMapper">
+
+    <resultMap id="rel" type="Album">
+        <id column="aid" property="id"></id>
+        <result column="atitle" property="title"></result>
+        <result column="acount" property="count"></result>
+        <result column="aco" property="covreImg"></result>
+        <result column="ascore" property="score"></result>
+        <result column="aauthor" property="author"></result>
+        <result column="abroadcast" property="broadcast"></result>
+        <result column="abrief" property="brief"></result>
+        <result column="apub" property="pubDate"></result>
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"></id>
+            <result column="ctitle" property="title"></result>
+            <result column="csize" property="size"></result>
+            <result column="cduration" property="duration"></result>
+            <result column="curl" property="url"></result>
+            <result column="cup" property="uploadDate"></result>
+            <result column="caid" property="aid"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getAll"  resultMap="rel">
+        select a.id aid,a.title atitle,a.count acount,a.covre_img aco,a.score ascore,a.author aauthor,
+               a.broadcast abroadcast,a.brief abrief,a.pub_date apub,
+               c.id cid,c.title ctitle,c.size csize,c.duration cduration,c.url curl,
+               c.upload_date cup, c.aid caid
+        from album a left join chapter c on a.id=c.aid
+    </select>
+
+</mapper>

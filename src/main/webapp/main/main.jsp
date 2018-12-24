@@ -44,8 +44,8 @@
         } else {
             $('#tt').tabs('add', {
                 title: title,
-                iconCls: "icon-save",
-                href: "${pageContext.request.contextPath}/banner"+url,
+                iconCls: "icon-tip",
+                href: "${pageContext.request.contextPath}"+url,
                 selected: true,
                 closable: true
             });

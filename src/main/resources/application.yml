@@ -5,6 +5,7 @@ server:
   jsp-servlet:
     init-parameters:
         development: true
+  connection-timeout: 60000
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -23,6 +24,7 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+
 
 mybatis:
   mapper-locations: classpath:com/baizhi/mapper/*MapperImpl.xml
