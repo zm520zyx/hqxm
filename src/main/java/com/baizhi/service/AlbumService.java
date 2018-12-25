@@ -10,4 +10,5 @@ public interface AlbumService {
    public List<Album> getAll();
    public Album getOne(String id);
    public void add(Album album);
+   public int getCount();
 }

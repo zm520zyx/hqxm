@@ -7,7 +7,7 @@
             handler: function () {
                  data = $("#album").treegrid("getSelected");
 
-                if (data != null) {
+                if (data.children!= null) {
                     $("#Dialog").dialog("open");
                 } else {
                     alert("请先选要查看的专辑")
@@ -47,7 +47,19 @@
                     alert("请先选择要下载的音频")
                 }
             }
-        }]
+        },'-', {
+            text: "文件导出",
+            iconCls: 'icon-tip',
+            handler: function () {
+                $.get("${pageContext.request.contextPath}/album/outport",
+                    function(){
+                        $.messager.show({
+                            title:"系统提示",
+                            msg:"导入成功"
+                        });
+                    },"");
+            }
+            }]
 
     $(function () {
         $('#album').treegrid({
@@ -61,9 +73,12 @@
                 {field:'url',title:'下载路径',width:60},
                 {field:'uploadDate',title:'上传时间',width:60},
             ]],
-            fit:true,
+
             fitColumns:true,
             toolbar:toolbar,
+            pagination: true,
+            pageList: [1, 2, 3, 4, 5],
+            pageSize: 5,
             onDblClickRow: function(index,row){
                 $("#guGe").prop("src","${pageContext.request.contextPath}"+index.url);
             }

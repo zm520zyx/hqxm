@@ -26,6 +26,12 @@ public class AlbumServiceImpl implements AlbumService{
         return album;
     }
 
+    @Override
+    public int getCount() {
+        int i = albumMapper.selectCount(new Album());
+        return  i;
+    }
+
     public void add(Album album) {
         String id=UUID.randomUUID().toString().replace("-", "");
         album.setId(id);

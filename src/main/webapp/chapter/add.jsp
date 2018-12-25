@@ -5,7 +5,7 @@
 $(function(){
 
    $("#title").textbox({
-		required:true
+       required:true
    });
 $("#uploadDate").datebox({
 		required:true,
