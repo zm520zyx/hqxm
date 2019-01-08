@@ -1,3 +1,4 @@
+
 package com.baizhi.controller;
 
 import com.baizhi.entity.Admin;
@@ -13,12 +14,13 @@ import java.util.List;
 @RequestMapping("admin")
 public class AdminController {
     @Autowired
-    private AdminService userService;
+    private AdminService adminService;
+
     @RequestMapping("login")
-    public String login(Admin admin ,String code,HttpSession session){
-        String realcode=(String)session.getAttribute("code");
-        if(!realcode.equals(code))return "验证码错误" ;
-        String s=userService.login(admin,session);
-        return s;
+    public String login(Admin admin, String code, HttpSession session) {
+        String realcode = (String) session.getAttribute("code");
+        if (!realcode.equals(code)) return "验证码错误";
+        String login = adminService.login(admin, session);
+        return  login;
     }
 }

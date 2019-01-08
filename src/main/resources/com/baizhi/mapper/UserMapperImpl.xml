@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.baizhi.baizhi.mapper.UserMapper">
+
+    <select id="oneWeek"  resultType="java.lang.Integer">
+       <![CDATA[
+        select count(*) from user  where  datediff(now(),reg_date)<7
+       ]]>
+    </select>
+    <select id="twoWeek"  resultType="java.lang.Integer">
+        <![CDATA[
+        select count(*) from user  where  datediff(now(),reg_date)<14
+        ]]>
+   </select>
+    <select id="threeWeek"  resultType="java.lang.Integer">
+        <![CDATA[
+        select count(*) from user  where  datediff(now(),reg_date)<21
+        ]]>
+    </select>
+
+    <select id="fourWeek"  resultType="java.lang.Integer">
+        <![CDATA[
+        select count(*) from user  where  datediff(now(),reg_date)<28
+        ]]>
+    </select>
+
+    <select id="fiveWeek"  resultType="java.lang.Integer">
+        <![CDATA[
+        select count(*) from user  where  datediff(now(),reg_date)<35
+        ]]>
+    </select>
+
+    <select id="getNumber2" resultType="com.com.baizhi.baizhi.dto.Number2Dto">
+    select province name,count(*) value from user group by province
+</select>
+
+    <select id="getNumber3" resultType="com.com.baizhi.baizhi.dto.Number2Dto">
+        select province name,count(*) value from user where sex='男' group by province
+    </select>
+
+    <select id="getNumber4" resultType="com.com.baizhi.baizhi.dto.Number2Dto">
+        select province name,count(*) value from user where sex='女' group by province
+    </select>
+
+
+
+</mapper>

@@ -1,22 +1,21 @@
 package com.baizhi.controller;
+        import com.baizhi.entity.Chapter;
+        import com.baizhi.service.ChapterService;
+        import org.apache.commons.io.FileUtils;
+        import org.jaudiotagger.audio.AudioFileIO;
+        import org.jaudiotagger.audio.mp3.MP3AudioHeader;
+        import org.jaudiotagger.audio.mp3.MP3File;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RestController;
+        import org.springframework.web.multipart.MultipartFile;
 
-import com.baizhi.entity.Chapter;
-import com.baizhi.service.ChapterService;
-import org.apache.commons.io.FileUtils;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.mp3.MP3AudioHeader;
-import org.jaudiotagger.audio.mp3.MP3File;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.net.URLEncoder;
+        import javax.servlet.ServletContext;
+        import javax.servlet.ServletOutputStream;
+        import javax.servlet.http.HttpServletResponse;
+        import javax.servlet.http.HttpSession;
+        import java.io.File;
+        import java.net.URLEncoder;
 
 
 @RestController
@@ -42,25 +41,24 @@ public class ChapterController {
         String fileTimeLength = audioHeader.getTrackLengthAsString();
         if (fileTimeLength.length() < 7) {
             fileTimeLength = "00:" + fileTimeLength;
-
         }
         chapter.setDuration(fileTimeLength);
         chapterService .add(chapter);
     }
     @RequestMapping("download")
     public  void dawnload(String name, HttpSession session, HttpServletResponse response) {
-   try {
-       String realPath=session.getServletContext().getRealPath("/chaptermp3");
-       String realName = name.replace("/chaptermp3/", "");
-       byte[] bs= FileUtils.readFileToByteArray(new File(realPath+"/"+realName));
-       response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode(realName,"UTF-8"));
-       ServletOutputStream outputStream=response.getOutputStream();
-       outputStream.write(bs);
-       if(outputStream!=null) outputStream.flush();
-       if(outputStream!=null) outputStream.close();
+        try {
+            String realPath=session.getServletContext().getRealPath("/chaptermp3");
+            String realName = name.replace("/chaptermp3/", "");
+            byte[] bs= FileUtils.readFileToByteArray(new File(realPath+"/"+realName));
+            response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode(realName,"UTF-8"));
+            ServletOutputStream outputStream=response.getOutputStream();
+            outputStream.write(bs);
+            if(outputStream!=null) outputStream.flush();
+            if(outputStream!=null) outputStream.close();
 
-   }catch (Exception e){
-       e.printStackTrace();
-   }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
